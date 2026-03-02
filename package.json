@@ -1,0 +1,43 @@
+{
+  "name": "openclaw-save-tokens-mode",
+  "version": "0.1.0",
+  "description": "Session-scoped token optimization mode plugin for OpenClaw.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/cheng-yi-cc/openclaw-save-tokens-mode#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheng-yi-cc/openclaw-save-tokens-mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheng-yi-cc/openclaw-save-tokens-mode/issues"
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "token",
+    "optimization",
+    "feishu"
+  ],
+  "files": [
+    "index.ts",
+    "openclaw.plugin.json",
+    "src/**/*.ts",
+    "!src/**/__tests__/**",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}

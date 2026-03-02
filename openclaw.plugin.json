@@ -1,0 +1,31 @@
+{
+  "id": "save-tokens-mode",
+  "name": "Save Tokens Mode",
+  "description": "Session-scoped token saving mode toggled via /save tokens.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "profile": {
+        "type": "string",
+        "enum": ["conservative", "balanced", "aggressive"]
+      },
+      "stateTtlDays": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "maxToolTextChars": {
+        "type": "integer",
+        "minimum": 200
+      },
+      "keepHeadChars": {
+        "type": "integer",
+        "minimum": 100
+      },
+      "maxDetailsStringChars": {
+        "type": "integer",
+        "minimum": 64
+      }
+    }
+  }
+}
