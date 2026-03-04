@@ -1,4 +1,4 @@
-export type SaveTokensProfile = "conservative" | "balanced" | "aggressive";
+锘縠xport type SaveTokensProfile = "conservative" | "balanced" | "aggressive";
 
 export type SaveTokensPluginConfig = {
   profile: SaveTokensProfile;
@@ -13,20 +13,20 @@ type LoggerLike = {
 };
 
 export const DEFAULT_SAVE_TOKENS_CONFIG: SaveTokensPluginConfig = {
-  profile: "balanced",
+  profile: "conservative",
   stateTtlDays: 14,
-  maxToolTextChars: 1800,
-  keepHeadChars: 1400,
-  maxDetailsStringChars: 512,
+  maxToolTextChars: 12000,
+  keepHeadChars: 8000,
+  maxDetailsStringChars: 4096,
 };
 
 const SUPPORTED_PROFILES = new Set<SaveTokensProfile>(["conservative", "balanced", "aggressive"]);
 
 const BALANCED_PREPEND_CONTEXT =
-  "save-tokens mode (balanced): 要求结论优先、避免复述、无请求不贴长日志与大段代码、工具结果仅摘要。";
+  "save-tokens mode (balanced): keep conclusions first, avoid unnecessary repetition, and summarize large tool outputs when possible.";
 
 const CONSERVATIVE_PREPEND_CONTEXT =
-  "save-tokens mode (conservative): keep answers concise, avoid unnecessary repetition, and avoid large logs unless explicitly requested.";
+  "save-tokens mode (conservative): prioritize user experience and completeness; only remove clearly wasteful verbosity (unnecessary repetition, huge raw logs, oversized tool dumps).";
 
 const AGGRESSIVE_PREPEND_CONTEXT =
   "save-tokens mode (aggressive): prioritize shortest useful response, avoid long explanations by default, summarize tool output only, and omit verbose logs unless explicitly requested.";
@@ -74,7 +74,10 @@ export function parsePluginConfig(rawConfig: unknown, logger?: LoggerLike): Save
     64,
   );
 
-  if (typeof input.profile === "string" && !SUPPORTED_PROFILES.has(input.profile.trim().toLowerCase() as SaveTokensProfile)) {
+  if (
+    typeof input.profile === "string" &&
+    !SUPPORTED_PROFILES.has(input.profile.trim().toLowerCase() as SaveTokensProfile)
+  ) {
     logger?.warn?.(`[save-tokens-mode] unsupported profile "${input.profile}", fallback to "${profile}"`);
   }
 
